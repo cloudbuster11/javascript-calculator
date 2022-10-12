@@ -1,0 +1,126 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap");
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "orbitron";
+}
+
+body {
+  background-color: aliceblue;
+}
+
+.wrapper {
+  width: 860px;
+  height: 100vh;
+  margin: 0 auto;
+  background-color: lightgray;
+  display: flex;
+  align-items: center;
+}
+
+.calculator {
+  height: 500px;
+  width: 500px;
+  background-color: #fff;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  grid-template-areas:
+    "screen screen screen screen"
+    "nr7 nr8 nr9 div"
+    "nr4 nr5 nr6 multi"
+    "nr1 nr2 nr3 minus"
+    "nr0 dot add ac"
+    "equal equal equal equal";
+  gap: 1rem;
+}
+
+.screen__output {
+  grid-area: screen;
+  background-color: #9fc37a;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  height: 75px;
+  text-align: right;
+  font-size: 3rem;
+}
+
+button {
+  height: 100%;
+  width: 100%;
+  border-radius: 1rem;
+  border: none;
+}
+
+.button .nr__1 {
+  grid-area: nr1;
+}
+
+.nr__2 {
+  grid-area: nr2;
+}
+
+.nr__3 {
+  grid-area: nr3;
+}
+
+.nr__4 {
+  grid-area: nr4;
+}
+
+.nr__5 {
+  grid-area: nr5;
+}
+
+.nr__6 {
+  grid-area: nr6;
+}
+
+.nr__7 {
+  grid-area: nr7;
+}
+
+.nr__8 {
+  grid-area: nr8;
+}
+
+.nr__9 {
+  grid-area: nr9;
+}
+
+.nr__0 {
+  grid-area: nr0;
+}
+
+.divide {
+  grid-area: div;
+}
+
+.multi {
+  grid-area: multi;
+}
+
+.minus {
+  grid-area: minus;
+}
+
+.add {
+  grid-area: add;
+}
+
+.dot {
+  grid-area: dot;
+}
+
+.equal {
+  grid-area: equal;
+}
+
+.ac {
+  grid-area: ac;
+}
