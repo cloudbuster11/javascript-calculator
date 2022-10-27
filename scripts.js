@@ -1,66 +1,121 @@
+const display = document.querySelector('.screen__output');
+display.value = 0;
+
 const calculator = {
-  displayValue: "0",
+  displayValue: '0',
   firstOperand: null,
-  waitingForSecondOperator: false,
+  secondOperand: null,
   operator: null,
+  timeForSecondOperand: false,
 };
 
-function updateDisplay() {
-  const display = document.querySelector(".screen__output");
-  display.value = calculator.displayValue;
-}
-
-updateDisplay();
-
-const keys = document.querySelector(".calculator");
-keys.addEventListener("click", (event) => {
+// Lyssnar efter vilka knappar som trycks.
+const keys = document.querySelector('.calculator');
+keys.addEventListener('click', (event) => {
   const { target } = event;
-  if (!target.matches("button")) {
+  // console.log(target); Target är själva html taggen
+  // console.log(event); Event är själva klicket
+  // target.value är värdet value i html taggen
+
+  if (!target.matches('button')) {
     return;
-  } else if (target.classList.contains("operator")) {
-    handleOperator(target.value);
+  } else if (target.classList.contains('operator')) {
+    operator(target.value);
     updateDisplay();
     return;
-  } else if (target.classList.contains("decimal")) {
+  } else if (target.classList.contains('decimal')) {
     inputDecimal(target.value);
     updateDisplay();
     return;
-  } else if (target.classList.contains("all-clear")) {
-    console.log("Ac", target.value);
+  } else if (target.classList.contains('all-clear')) {
+    console.log('Ac', target.value);
+    return;
+  } else if (target.classList.contains('equal')) {
+    calculate();
+    console.log(target.value);
     return;
   }
   inputDigit(target.value);
   updateDisplay();
 });
 
+// Matar in sifforna i objektet
 function inputDigit(digit) {
-  const { displayValue, waitingForSecondOperand } = calculator;
+  let { displayValue, timeForSecondOperand, secondOperand } =
+    calculator;
 
-  if (waitingForSecondOperand === true) {
-    calculator.displayValue = digit;
-    calculator.waitingForSecondOperand = false;
+  if (timeForSecondOperand === true) {
+    calculator.displayValue =
+      displayValue === '0' ? digit : displayValue + digit;
+    calculator.secondOperand = Number(calculator.displayValue);
+    console.log(`Second operand = ${calculator.secondOperand}`);
+    console.log('andra rundan');
+    console.log(`Andra runda tryckt siffra är ${digit}`);
+    console.log(
+      `Andra runda siffran i displayvalue är ${calculator.displayValue}`
+    );
+    // timeForSecondOperand = false;
+    return;
   } else {
     calculator.displayValue =
-      displayValue === "0" ? digit : displayValue + digit;
-  }
+      displayValue === '0' ? digit : displayValue + digit;
+    console.log(`Tryckt siffra är ${digit}`);
+    console.log(
+      `Siffran i displayvalue är ${calculator.displayValue}`
+    );
+    console.log('första runda');
 
-  console.log(calculator);
+    return;
+  }
 }
 
-function inputDecimal(dot) {
-  if (!calculator.displayValue.includes(dot)) {
-    calculator.displayValue += dot;
-  }
+// Uppdaterar display
+function updateDisplay() {
+  const display = document.querySelector('.screen__output');
+  display.value = calculator.displayValue;
 }
-function handleOperator(nextOperator) {
+
+// Om en operator blir tryckt
+function operator(nextOperator) {
   const { firstOperand, displayValue, operator } = calculator;
-  const inputValue = parseFloat(displayValue);
-
-  if (firstOperand === null && !isNaN(inputValue)) {
-    calculator.firstOperand = inputValue;
-  }
-
-  calculator.waitingForSecondOperator = true;
+  calculator.firstOperand = Number(calculator.displayValue);
+  calculator.displayValue = '0';
+  calculator.timeForSecondOperand = true;
   calculator.operator = nextOperator;
+  console.log(calculator.operator);
   console.log(calculator);
+
+  // updateDisplay();
+  // inputDigit();
+  return;
+}
+
+function calculate() {
+  const { firstOperand, operator, secondOperand } = calculator;
+  console.log('dags att addera');
+  console.log(`First operand = ${firstOperand}`);
+  console.log(`Second operand = ${secondOperand}`);
+  console.log(`Operator är ${operator}`);
+  let result;
+  if (operator === '+') {
+    result = firstOperand + secondOperand;
+    console.log(result);
+    calculator.displayValue = result;
+    updateDisplay();
+  } else if (operator === '-') {
+    result = firstOperand - secondOperand;
+    console.log(result);
+    calculator.displayValue = result;
+    updateDisplay();
+  } else if (operator === '/') {
+    result = firstOperand / secondOperand;
+    console.log(result);
+    calculator.displayValue = result;
+    updateDisplay();
+  } else if (operator === '*') {
+    result = firstOperand * secondOperand;
+    console.log(result);
+    calculator.displayValue = result;
+    updateDisplay();
+  }
 }
