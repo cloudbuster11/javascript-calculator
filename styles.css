@@ -1,10 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: "orbitron";
+  font-family: 'orbitron';
 }
 
 body {
@@ -31,12 +31,12 @@ body {
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(6, 1fr);
   grid-template-areas:
-    "screen screen screen screen"
-    "nr7 nr8 nr9 div"
-    "nr4 nr5 nr6 multi"
-    "nr1 nr2 nr3 minus"
-    "nr0 dot add ac"
-    "equal equal equal equal";
+    'screen screen screen screen'
+    'nr7 nr8 nr9 div'
+    'nr4 nr5 nr6 multi'
+    'nr1 nr2 nr3 minus'
+    'nr0 dot add del'
+    'equal equal equal ac';
   gap: 1rem;
 }
 
@@ -55,6 +55,7 @@ button {
   width: 100%;
   border-radius: 1rem;
   border: none;
+  font-size: 1.5rem;
 }
 
 .button .nr__1 {
@@ -123,4 +124,12 @@ button {
 
 .ac {
   grid-area: ac;
+}
+
+.del {
+  grid-area: del;
+}
+
+.all-clear {
+  background-color: orangered;
 }

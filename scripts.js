@@ -31,6 +31,9 @@ keys.addEventListener('click', (event) => {
     calculate();
     console.log(target.value);
     return;
+  } else if (target.classList.contains('delete')) {
+    deleteNum();
+    return;
   }
   inputDigit(target.value);
   updateDisplay();
@@ -52,7 +55,7 @@ function inputDigit(digit) {
     console.log(
       `Andra runda siffran i displayvalue är ${calculator.displayValue}`
     );
-    // timeForSecondOperand = false;
+
     return;
   } else {
     calculator.displayValue =
@@ -94,6 +97,7 @@ function calculate() {
   const { firstOperand, operator, secondOperand } = calculator;
   console.log('dags att addera');
   console.log(`First operand = ${firstOperand}`);
+
   console.log(`Second operand = ${secondOperand}`);
   console.log(`Operator är ${operator}`);
   console.log(calculator.timeForSecondOperand);
@@ -133,4 +137,13 @@ function allClear() {
   calculator.operator = null;
   console.log(calculator);
   updateDisplay();
+}
+
+function deleteNum() {
+  calculator.displayValue = calculator.displayValue.slice(0, -1);
+  calculator.secondOperand = Number(calculator.displayValue);
+  console.log(calculator.secondOperand);
+
+  updateDisplay();
+  console.log(calculator.displayValue);
 }
