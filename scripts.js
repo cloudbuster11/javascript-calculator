@@ -23,10 +23,6 @@ keys.addEventListener('click', (event) => {
     operator(target.value);
     updateDisplay();
     return;
-  } else if (target.classList.contains('decimal')) {
-    inputDecimal(target.value);
-    updateDisplay();
-    return;
   } else if (target.classList.contains('all-clear')) {
     console.log('Ac', target.value);
     allClear();
@@ -91,6 +87,8 @@ function operator(nextOperator) {
   // inputDigit();
   return;
 }
+
+function inputDecimal() {}
 
 function calculate() {
   const { firstOperand, operator, secondOperand } = calculator;
