@@ -29,6 +29,7 @@ keys.addEventListener('click', (event) => {
     return;
   } else if (target.classList.contains('all-clear')) {
     console.log('Ac', target.value);
+    allClear();
     return;
   } else if (target.classList.contains('equal')) {
     calculate();
@@ -48,6 +49,7 @@ function inputDigit(digit) {
     calculator.displayValue =
       displayValue === '0' ? digit : displayValue + digit;
     calculator.secondOperand = Number(calculator.displayValue);
+
     console.log(`Second operand = ${calculator.secondOperand}`);
     console.log('andra rundan');
     console.log(`Andra runda tryckt siffra är ${digit}`);
@@ -96,26 +98,41 @@ function calculate() {
   console.log(`First operand = ${firstOperand}`);
   console.log(`Second operand = ${secondOperand}`);
   console.log(`Operator är ${operator}`);
+  console.log(calculator.timeForSecondOperand);
   let result;
   if (operator === '+') {
     result = firstOperand + secondOperand;
     console.log(result);
     calculator.displayValue = result;
+    calculator.timeForSecondOperand = false;
     updateDisplay();
   } else if (operator === '-') {
     result = firstOperand - secondOperand;
     console.log(result);
+    calculator.timeForSecondOperand = false;
     calculator.displayValue = result;
     updateDisplay();
   } else if (operator === '/') {
     result = firstOperand / secondOperand;
     console.log(result);
+    calculator.timeForSecondOperand = false;
     calculator.displayValue = result;
     updateDisplay();
   } else if (operator === '*') {
     result = firstOperand * secondOperand;
     console.log(result);
+    calculator.timeForSecondOperand = false;
     calculator.displayValue = result;
     updateDisplay();
   }
+}
+
+function allClear() {
+  calculator.timeForSecondOperand = false;
+  calculator.displayValue = '0';
+  calculator.firstOperand = null;
+  calculator.secondOperand = null;
+  calculator.operator = null;
+  console.log(calculator);
+  updateDisplay();
 }
